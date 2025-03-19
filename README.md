@@ -130,15 +130,17 @@ La documentación de la API está disponible a través de Swagger UI:
 ### Paquetes Principales
 ```
 com.cesde.proyecto_integrador/
-├── auth/                  # Autenticación y autorización
-├── config/                # Configuraciones de la aplicación
-├── controller/            # Controladores REST
-├── dto/                   # Objetos de transferencia de datos
-├── exception/             # Manejo de excepciones
-├── model/                 # Entidades y modelos
-├── repository/            # Interfaces de repositorio
-├── service/               # Lógica de negocio
-└── ProyectoIntegradorApplication.java  # Punto de entrada
+├── config/                # Configuraciones (CORS, OpenAPI, Security)
+│   └── data/             # Carga inicial de datos
+├── controller/            # Controladores REST por rol
+├── dto/                   # DTOs para usuarios y categorías
+├── exception/             # Manejo global de excepciones
+├── model/                 # Entidades (User, Profile)
+├── repository/            # Repositorios JPA
+├── security/              # Configuración JWT
+├── service/               # Servicios por rol de usuario
+│   └── impl/             # Implementaciones de servicios
+└── ProyectoIntegradorApplication.java
 ```
 
 ## Autenticación y Autorización
@@ -164,10 +166,11 @@ com.cesde.proyecto_integrador/
 
 ### Roles de Usuario
 
-El sistema implementa dos roles principales:
+El sistema implementa tres roles principales:
 
 - **ADMIN**: Acceso completo al sistema, incluida la gestión de usuarios
-- **USER**: Acceso limitado a funcionalidades específicas
+- **STUDENT**: Acceso a funcionalidades específicas para estudiantes
+- **TEACHER**: Acceso a funcionalidades específicas para profesores
 
 ## Base de Datos
 
@@ -180,7 +183,13 @@ El proyecto está configurado para trabajar con MySQL por defecto, pero también
 #### User
 
 - **Atributos**: id, email, password, role, createdAt, updatedAt
-- **Roles**: ADMIN, USER
+- **Roles**: ADMIN, STUDENT, TEACHER
+- **Relaciones**: OneToOne con Profile
+
+#### Profile
+
+- **Atributos**: id, name, lastName, phone, address, urlPhoto
+- **Relaciones**: OneToOne con User
 
 ## Despliegue en la Nube
 
