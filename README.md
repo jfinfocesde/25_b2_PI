@@ -62,7 +62,7 @@ Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
 ```
 # MySQL
-DB_URL=jdbc:mysql://localhost:3306/data_pi
+DB_URL=jdbc:mysql://localhost:3306/data_pi?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
 DB_USERNAME=root
 DB_PASSWORD=tu_contraseña
 
